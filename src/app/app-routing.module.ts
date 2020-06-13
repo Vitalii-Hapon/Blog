@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
-import {HomePageComponent} from './pages/home-page/home-page.component';
-import {PostPageComponent} from './pages/post-page/post-page.component';
+import {MainLayoutComponent} from './core/layouts/main-layout/main-layout.component';
+import {HomePageComponent} from './core/pages/home-page/home-page.component';
+import {PostPageComponent} from './core/pages/post-page/post-page.component';
 
 
 const routes: Routes = [
@@ -14,6 +14,9 @@ const routes: Routes = [
       {path: '', component: HomePageComponent},
       {path: 'post/:id', component: PostPageComponent}
     ]
+  },
+  {
+    path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
 ];
 
