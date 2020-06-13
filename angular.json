@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Blog"
+    }
+  },
+  "defaultProject": "Blog",
+  "cli": {
+    "analytics": false
+  }
 }
