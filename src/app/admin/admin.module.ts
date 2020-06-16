@@ -6,6 +6,7 @@ import {LoginPageComponent} from './core/pages/login-page/login-page.component';
 import {DashboardPageComponent} from './core/pages/dashboard-page/dashboard-page.component';
 import {CreatePageComponent} from './core/pages/create-page/create-page.component';
 import {EditPageComponent} from './core/pages/edit-page/edit-page.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -30,6 +31,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
