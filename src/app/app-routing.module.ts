@@ -3,7 +3,6 @@ import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import {MainLayoutComponent} from './core/layouts/main-layout/main-layout.component';
 import {HomePageComponent} from './core/pages/home-page/home-page.component';
 import {PostPageComponent} from './core/pages/post-page/post-page.component';
-import {EditPageComponent} from './admin/core/pages/edit-page/edit-page.component';
 
 
 const routes: Routes = [

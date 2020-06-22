@@ -11,22 +11,29 @@
            type="email"
            formControlName="email">
 
-    <div class="validation">
-      <small>error</small>
+    <div class="validation"
+         *ngIf="form.get('email').touched && form.get('email').invalid">
+      <small *ngIf="form.get('email').errors.required">type the email</small>
+      <small *ngIf="form.get('email').errors.email">field "email" must be email</small>
     </div>
+
   </div>
 
   <div class="form-control"
        [ngClass]="{
-       invalid: form.get('email').touched && form.get('email').invalid}">
+       invalid: form.get('password').touched && form.get('password').invalid}">
 
     <label for="password">Password:</label>
     <input id="password"
            type="password"
            formControlName="password">
 
-    <div class="validation">
-      <small>error</small>
+    <div class="validation"
+         *ngIf="form.get('password').touched && form.get('password').invalid">
+      <small *ngIf="form.get('password').errors.required">type the password</small>
+      <small *ngIf="form.get('password').errors.minlength">password must contain at least
+        {{form.get('password').errors.minlength.requiredLength}} letter. Now it contain
+        {{form.get('password').errors.minlength.actualLength}} letters.</small>
     </div>
   </div>
 
