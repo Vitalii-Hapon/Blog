@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppRoutingModule} from './app-routing.module';
+import {SharedModule} from './shared/shared.module';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MainLayoutComponent } from './core/layouts/main-layout/main-layout.component';
+import {AppComponent} from './app.component';
+import {MainLayoutComponent} from './core/layouts/main-layout/main-layout.component';
 import {HomePageComponent} from './core/pages/home-page/home-page.component';
 import {PostPageComponent} from './core/pages/post-page/post-page.component';
-import { PostTitleComponent } from './shared/components/post-title/post-title.component';
+import {PostTitleComponent} from './shared/components/post-title/post-title.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +19,11 @@ import { PostTitleComponent } from './shared/components/post-title/post-title.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
