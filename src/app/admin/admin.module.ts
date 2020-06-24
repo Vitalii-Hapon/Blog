@@ -10,15 +10,16 @@ import {DashboardPageComponent} from './core/pages/dashboard-page/dashboard-page
 import {CreatePageComponent} from './core/pages/create-page/create-page.component';
 import {EditPageComponent} from './core/pages/edit-page/edit-page.component';
 import {AuthService} from './core/services/auth.service';
+import {AuthGuard} from './core/services/auth.guard';
 
 const routes: Routes = [
   {
     path: '', component: AdminLayoutComponent, children: [
       {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
       {path: 'login', component: LoginPageComponent},
-      {path: 'dashboard', component: DashboardPageComponent},
-      {path: 'create', component: CreatePageComponent},
-      {path: 'post-title/:id/edit', component: EditPageComponent},
+      {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
+      {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard]},
+      {path: 'post-title/:id/edit', component: EditPageComponent, canActivate: [AuthGuard]},
     ]
   }
 ];
@@ -39,7 +40,10 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  providers: [AuthService]
+  providers: [
+    AuthService,
+    AuthGuard
+  ]
 })
 
 export class AdminModule {

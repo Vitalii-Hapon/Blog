@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {User} from '../../../../shared/interfaces';
 import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
@@ -20,15 +20,26 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   // variables
   ngUnsubscribe = new Subject();
   submitted: boolean;
+  message: string;
   error$: Observable<string>;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              private router: Router) {
-  }
+              private router: Router,
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.error$ = this.authService.error$;
+
+    this.route.queryParams
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe((params: Params) => {
+        if (params.loginAgain) {
+          this.message = 'Sign in, please';
+        }
+      });
   }
 
   submit() {
