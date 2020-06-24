@@ -19,6 +19,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   });
   // variables
   ngUnsubscribe = new Subject();
+  submitted: boolean;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -38,12 +39,15 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       password: this.form.value.password
     };
 
+    this.submitted = true;
+
     this.authService.login(user)
-      // .pipe(
-      //   takeUntil(this.ngUnsubscribe))
+      .pipe(
+        takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);
+        this.submitted = false;
       });
   }
 
