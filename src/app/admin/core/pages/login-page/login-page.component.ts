@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {User} from '../../../../shared/interfaces';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
@@ -20,6 +20,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   // variables
   ngUnsubscribe = new Subject();
   submitted: boolean;
+  error$: Observable<string>;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -27,6 +28,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.error$ = this.authService.error$;
   }
 
   submit() {
@@ -47,6 +49,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);
+        this.submitted = false;
+      }, () => {
         this.submitted = false;
       });
   }

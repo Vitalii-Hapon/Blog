@@ -2,6 +2,10 @@
 
   <h2>Login admin panel</h2>
 
+  <div class="alert alert-danger" *ngIf="error$ | async as errorMessage">
+    {{errorMessage}}
+  </div>
+
   <div class="form-control"
        [ngClass]="{
        invalid: form.get('email').touched && form.get('email').invalid}">
