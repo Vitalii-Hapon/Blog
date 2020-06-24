@@ -39,8 +39,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     };
 
     this.authService.login(user)
-      .pipe(
-        takeUntil(this.ngUnsubscribe))
+      // .pipe(
+      //   takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);

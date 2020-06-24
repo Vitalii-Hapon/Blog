@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -9,4 +9,5 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}
