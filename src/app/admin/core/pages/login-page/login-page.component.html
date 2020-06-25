@@ -1,12 +1,16 @@
-<form [formGroup]="form" class="card" (ngSubmit)="submit()">
+<form [formGroup]="form"
+      class="card"
+      (ngSubmit)="submit()">
 
   <h2>Login admin panel</h2>
 
-  <div class="alert alert-danger" *ngIf="error$ | async as errorMessage">
+  <div class="alert alert-danger"
+       *ngIf="error$ | async as errorMessage">
     {{errorMessage}}
   </div>
 
-  <div class="alert alert-info" *ngIf="message">
+  <div class="alert alert-info"
+       *ngIf="message">
     {{message}}
   </div>
 

@@ -1,15 +1,61 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {Post} from '../../../../shared/interfaces';
+import {PostsService} from '../../../../core/services/posts.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
   styleUrls: ['./create-page.component.scss']
 })
-export class CreatePageComponent implements OnInit {
+export class CreatePageComponent implements OnInit, OnDestroy {
+  // post form
+  form = this.fb.group({
+    title: ['', Validators.required],
+    content: ['', Validators.required],
+    author: ['', Validators.required],
+  });
+  // variables
+  ngUnsubscribe = new Subject();
+  // submitted: boolean;
 
-  constructor() { }
+  constructor(private fb: FormBuilder,
+              private postsService: PostsService) {
+  }
 
   ngOnInit(): void {
   }
 
+
+  submit(): Post {
+    if (this.form.invalid) {
+      return;
+    } else {
+      const post: Post = {
+        title: this.form.value.title,
+        content: this.form.value.content,
+        author: this.form.value.author,
+        date: new Date()
+      };
+
+      // this.submitted = true;
+
+      this.postsService.create(post)
+        .pipe(
+          takeUntil(this.ngUnsubscribe)
+        )
+        .subscribe(() => {
+          this.form.reset();
+        }, () => {
+          // this.submitted = false;
+        });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.unsubscribe();
+  }
 }

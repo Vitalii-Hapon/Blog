@@ -26,7 +26,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.error$ = this.authService.error$;
@@ -38,6 +39,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .subscribe((params: Params) => {
         if (params.loginAgain) {
           this.message = 'Sign in, please';
+        } else if (params.authFailed) {
+          this.message = 'Session is over. Please enter the data again';
         }
       });
   }
@@ -45,25 +48,25 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   submit() {
     if (this.form.invalid) {
       return;
+    } else {
+      const user: User = {
+        email: this.form.value.email,
+        password: this.form.value.password
+      };
+
+      this.submitted = true;
+
+      this.authService.login(user)
+        .pipe(
+          takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.form.reset();
+          this.router.navigate(['/admin', 'dashboard']);
+          this.submitted = false;
+        }, () => {
+          this.submitted = false;
+        });
     }
-
-    const user: User = {
-      email: this.form.value.email,
-      password: this.form.value.password
-    };
-
-    this.submitted = true;
-
-    this.authService.login(user)
-      .pipe(
-        takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        this.form.reset();
-        this.router.navigate(['/admin', 'dashboard']);
-        this.submitted = false;
-      }, () => {
-        this.submitted = false;
-      });
   }
 
   ngOnDestroy(): void {

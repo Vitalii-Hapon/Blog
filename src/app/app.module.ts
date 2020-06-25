@@ -8,6 +8,15 @@ import {MainLayoutComponent} from './core/layouts/main-layout/main-layout.compon
 import {HomePageComponent} from './core/pages/home-page/home-page.component';
 import {PostPageComponent} from './core/pages/post-page/post-page.component';
 import {PostTitleComponent} from './shared/components/post-title/post-title.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './core/services/auth-interceptor';
+import {AuthService} from './admin/core/services/auth.service';
+
+const INTERCEPTOR_PROVIDE = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor
+};
 
 @NgModule({
   declarations: [
@@ -22,7 +31,7 @@ import {PostTitleComponent} from './shared/components/post-title/post-title.comp
     AppRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [INTERCEPTOR_PROVIDE, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
