@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {User} from '../../../../shared/interfaces';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../../../core/services/auth.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -38,9 +38,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       )
       .subscribe((params: Params) => {
         if (params.loginAgain) {
-          this.message = 'Sign in, please';
-        } else if (params.authFailed) {
           this.message = 'Session is over. Please enter the data again';
+        } else if (params.authFailed) {
+          this.message = 'Sign in, please';
         }
       });
   }
@@ -63,7 +63,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           this.form.reset();
           this.router.navigate(['/admin', 'dashboard']);
           this.submitted = false;
-        }, () => {
+        }, (error) => {
+          console.log(error);
           this.submitted = false;
         });
     }

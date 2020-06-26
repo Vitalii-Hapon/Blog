@@ -19,7 +19,6 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   });
   // variables
   ngUnsubscribe = new Subject();
-  // submitted: boolean;
 
   constructor(private fb: FormBuilder,
               private postsService: PostsService) {
@@ -40,16 +39,14 @@ export class CreatePageComponent implements OnInit, OnDestroy {
         date: new Date()
       };
 
-      // this.submitted = true;
-
       this.postsService.create(post)
         .pipe(
           takeUntil(this.ngUnsubscribe)
         )
         .subscribe(() => {
           this.form.reset();
-        }, () => {
-          // this.submitted = false;
+        }, (error) => {
+          console.log(error);
         });
     }
   }

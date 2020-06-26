@@ -10,7 +10,8 @@ import {QuillModule} from 'ngx-quill';
   exports: [
     HttpClientModule,
     QuillModule
-  ]
+  ],
+  declarations: []
 })
 export class SharedModule {
 }

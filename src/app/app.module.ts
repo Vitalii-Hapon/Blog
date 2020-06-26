@@ -7,10 +7,10 @@ import {AppComponent} from './app.component';
 import {MainLayoutComponent} from './core/layouts/main-layout/main-layout.component';
 import {HomePageComponent} from './core/pages/home-page/home-page.component';
 import {PostPageComponent} from './core/pages/post-page/post-page.component';
-import {PostTitleComponent} from './shared/components/post-title/post-title.component';
+import {PostComponent} from './shared/components/post/post.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './core/services/auth-interceptor';
-import {AuthService} from './admin/core/services/auth.service';
+import {AuthService} from './core/services/auth.service';
 
 const INTERCEPTOR_PROVIDE = {
   provide: HTTP_INTERCEPTORS,
@@ -24,7 +24,7 @@ const INTERCEPTOR_PROVIDE = {
     MainLayoutComponent,
     HomePageComponent,
     PostPageComponent,
-    PostTitleComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,

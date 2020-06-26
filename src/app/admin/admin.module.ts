@@ -9,7 +9,6 @@ import {LoginPageComponent} from './core/pages/login-page/login-page.component';
 import {DashboardPageComponent} from './core/pages/dashboard-page/dashboard-page.component';
 import {CreatePageComponent} from './core/pages/create-page/create-page.component';
 import {EditPageComponent} from './core/pages/edit-page/edit-page.component';
-import {AuthService} from './core/services/auth.service';
 import {AuthGuard} from './core/services/auth.guard';
 
 const routes: Routes = [
@@ -19,7 +18,7 @@ const routes: Routes = [
       {path: 'login', component: LoginPageComponent},
       {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
       {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard]},
-      {path: 'post-title/:id/edit', component: EditPageComponent, canActivate: [AuthGuard]},
+      {path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard]},
     ]
   }
 ];

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {FbAuthResponse, User} from '../../../shared/interfaces';
+import {FbAuthResponse, User} from '../../shared/interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
@@ -44,7 +44,6 @@ export class AuthService {
 
   private handleError(error: HttpErrorResponse) {
     const {message} = error.error.error;
-    console.log(message);
     switch (message) {
       case 'USER_DISABLED':
         this.error$.next('The user account has been disabled by an administrator');
