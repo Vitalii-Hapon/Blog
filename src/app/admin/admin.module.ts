@@ -10,6 +10,7 @@ import {DashboardPageComponent} from './core/pages/dashboard-page/dashboard-page
 import {CreatePageComponent} from './core/pages/create-page/create-page.component';
 import {EditPageComponent} from './core/pages/edit-page/edit-page.component';
 import {AuthGuard} from './core/services/auth.guard';
+import {PostFilterPipe} from '../shared/pipes/post-filter.pipe';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
     LoginPageComponent,
     DashboardPageComponent,
     CreatePageComponent,
-    EditPageComponent
+    EditPageComponent,
+    PostFilterPipe
   ],
   imports: [
     CommonModule,
