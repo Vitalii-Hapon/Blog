@@ -39,7 +39,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
         date: new Date()
       };
 
-      this.postsService.create(post)
+      this.postsService.createPost(post)
         .pipe(
           takeUntil(this.ngUnsubscribe)
         )

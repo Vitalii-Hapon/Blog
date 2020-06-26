@@ -33,9 +33,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.error$ = this.authService.error$;
 
     this.route.queryParams
-      .pipe(
-        takeUntil(this.ngUnsubscribe)
-      )
       .subscribe((params: Params) => {
         if (params.loginAgain) {
           this.message = 'Session is over. Please enter the data again';

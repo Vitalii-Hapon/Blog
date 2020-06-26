@@ -40,6 +40,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
+        this.posts = this.posts.filter( (item) => item.id !== id);
       }, (error => {
         console.log(error);
       }));
