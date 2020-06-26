@@ -5,6 +5,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {Post} from '../../../../shared/interfaces';
 import {Subject} from 'rxjs';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-edit-page',
@@ -24,7 +25,8 @@ export class EditPageComponent implements OnInit {
 
   constructor(private postsService: PostsService,
               private router: ActivatedRoute,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private alertService: AlertService) {
   }
 
   ngOnInit(): void {
@@ -57,6 +59,7 @@ export class EditPageComponent implements OnInit {
         takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.submitted = false;
+        this.alertService.warning('Post has been changed');
       }, error => {
         this.submitted = false;
         console.log(error);

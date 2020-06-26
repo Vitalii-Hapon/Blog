@@ -11,6 +11,8 @@ import {CreatePageComponent} from './core/pages/create-page/create-page.componen
 import {EditPageComponent} from './core/pages/edit-page/edit-page.component';
 import {AuthGuard} from './core/services/auth.guard';
 import {PostFilterPipe} from '../shared/pipes/post-filter.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import {AlertService} from './core/services/alert.service';
 
 const routes: Routes = [
   {
@@ -31,7 +33,8 @@ const routes: Routes = [
     DashboardPageComponent,
     CreatePageComponent,
     EditPageComponent,
-    PostFilterPipe
+    PostFilterPipe,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,8 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AlertService
   ]
 })
 

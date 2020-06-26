@@ -4,6 +4,7 @@ import {PostsService} from '../../../../core/services/posts.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -17,7 +18,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   // formControl for pipes
   filter = new FormControl('');
 
-  constructor(private postsService: PostsService) {
+  constructor(private postsService: PostsService,
+              private alertService: AlertService) {
   }
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.posts = this.posts.filter( (item) => item.id !== id);
+        this.alertService.danger('Post has been deleted');
       }, (error => {
         console.log(error);
       }));

@@ -4,6 +4,7 @@ import {Post} from '../../../../shared/interfaces';
 import {PostsService} from '../../../../core/services/posts.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-create-page',
@@ -21,7 +22,8 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   ngUnsubscribe = new Subject();
 
   constructor(private fb: FormBuilder,
-              private postsService: PostsService) {
+              private postsService: PostsService,
+              private alertService: AlertService) {
   }
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
         )
         .subscribe(() => {
           this.form.reset();
+          this.alertService.success('Post was created');
         }, (error) => {
           console.log(error);
         });

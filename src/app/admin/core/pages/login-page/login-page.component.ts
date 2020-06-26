@@ -5,6 +5,7 @@ import {AuthService} from '../../../../core/services/auth.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-login-page',
@@ -26,7 +27,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private alertService: AlertService) {
   }
 
   ngOnInit(): void {
@@ -60,6 +62,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           this.form.reset();
           this.router.navigate(['/admin', 'dashboard']);
           this.submitted = false;
+          this.alertService.success('You`ve sign in');
         }, (error) => {
           console.log(error);
           this.submitted = false;
