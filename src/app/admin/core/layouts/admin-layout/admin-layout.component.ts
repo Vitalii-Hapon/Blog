@@ -12,7 +12,7 @@ export class AdminLayoutComponent implements OnInit {
 
   constructor(private router: Router,
               private authService: AuthService,
-              private alertService:AlertService) {
+              private alertService: AlertService) {
   }
 
   ngOnInit(): void {
